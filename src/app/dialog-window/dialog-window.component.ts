@@ -14,7 +14,7 @@ import {
   animations: [ 
     trigger ('animateAnswer', [
       transition('void => *', [
-         style({opacity:0}), animate('200ms'),
+         style({opacity:0}), animate('300ms'),
       ]),
     ]),
   ]
