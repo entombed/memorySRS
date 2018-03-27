@@ -1,4 +1,4 @@
 
-<app-dialog-window #RefDialogWindow [inQuestion]="question" (outGetQuestion)="getQuestion()"></app-dialog-window>
+<app-dialog-window #RefDialogWindow [inQuestion]="question" (outGetQuestion)="getQuestion($event)"></app-dialog-window>
 
 <p-button label="Click" styleClass="ui-button-info" (onClick)="RefDialogWindow.show()"></p-button>

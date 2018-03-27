@@ -40,7 +40,7 @@ export class DialogWindowComponent implements OnInit {
 
   next(){
     this.displayAnswer = false;
-    this.outGetQuestion.emit();
+    this.outGetQuestion.emit(this.inQuestion.id);
   }
 
 }

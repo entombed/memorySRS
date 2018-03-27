@@ -45,9 +45,13 @@ sasas asasa
     },
   ]
 
-  getQuestion() {
+  getQuestion(id?) {
     let item = this._getRandomItem.getItem(0, this.questionsArray.length);
-    this.question = this.questionsArray[item];
-    this.question.id = item;
+    if (id == item) {
+      this.getQuestion(this._getRandomItem.getItem(0, this.questionsArray.length))
+    } else {
+      this.question = this.questionsArray[item];
+      this.question.id = item;
+    }
   }
 }
