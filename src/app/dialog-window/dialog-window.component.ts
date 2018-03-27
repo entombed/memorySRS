@@ -14,11 +14,12 @@ import {
   animations: [ 
     trigger ('animateAnswer', [
       transition('void => *', [
-        style({transform: 'translateX(-100%)', opacity:0}), animate('200ms'),
-        ]),
+         style({opacity:0}), animate('200ms'),
       ]),
-    ]
-  })
+    ]),
+  ]
+})
+
 export class DialogWindowComponent implements OnInit {
 
   constructor() { }
@@ -27,18 +28,19 @@ export class DialogWindowComponent implements OnInit {
   }
 
   @Input() inQuestion;
-  @Output() outGetNext = new EventEmitter<any>();
+  @Output() outGetQuestion = new EventEmitter<any>();
 
-  display: boolean = true;
+  displayDialog: boolean = true;
   displayAnswer: boolean = false;
 
   show(){
-    this.display = true;
+    this.outGetQuestion.emit();
+    this.displayDialog = true;
   }
 
   next(){
     this.displayAnswer = false;
-    this.outGetNext.emit();
+    this.outGetQuestion.emit();
   }
 
 }

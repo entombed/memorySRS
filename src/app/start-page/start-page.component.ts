@@ -12,7 +12,7 @@ export class StartPageComponent implements OnInit {
   constructor(private _getRandomItem : GetRandomItemService) { }
 
   ngOnInit() {
-    this.getNext();
+    this.getQuestion();
   }
 
   question: any;
@@ -45,8 +45,9 @@ sasas asasa
     },
   ]
 
-  getNext() {
+  getQuestion() {
     let item = this._getRandomItem.getItem(0, this.questionsArray.length);
     this.question = this.questionsArray[item];
+    this.question.id = item;
   }
 }
