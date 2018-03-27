@@ -1,0 +1,4 @@
+
+<app-dialog-window #RefDialogWindow [inQuestion]="question" (outGetNext)="getNext()"></app-dialog-window>
+
+<p-button label="Click" styleClass="ui-button-info" (onClick)="RefDialogWindow.show()"></p-button>
