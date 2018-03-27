@@ -15,11 +15,10 @@ import {
     trigger ('animateAnswer', [
       transition('void => *', [
         style({transform: 'translateX(-100%)', opacity:0}), animate('200ms'),
-        // style({transform: 'translateY(0)', opacity:0}), animate('800ms')
+        ]),
       ]),
-    ]),
-  ]
-})
+    ]
+  })
 export class DialogWindowComponent implements OnInit {
 
   constructor() { }
@@ -30,7 +29,7 @@ export class DialogWindowComponent implements OnInit {
   @Input() inQuestion;
   @Output() outGetNext = new EventEmitter<any>();
 
-  display: boolean = false;
+  display: boolean = true;
   displayAnswer: boolean = false;
 
   show(){
