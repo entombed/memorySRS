@@ -30,7 +30,7 @@ export class DialogWindowComponent implements OnInit {
   @Input() inQuestion;
   @Output() outGetQuestion = new EventEmitter<any>();
 
-  displayDialog: boolean = true;
+  displayDialog: boolean = false;
   displayAnswer: boolean = false;
 
   show(){

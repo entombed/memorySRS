@@ -1,4 +1,9 @@
 
-<app-dialog-window #RefDialogWindow [inQuestion]="question" (outGetQuestion)="getQuestion($event)"></app-dialog-window>
-
-<p-button label="Click" styleClass="ui-button-info" (onClick)="RefDialogWindow.show()"></p-button>
+<app-dialog-window [inQuestion]="question" (outGetQuestion)="getQuestion($event)"></app-dialog-window>
+<div class="ui-g">
+  <div class="ui-g-4"></div>
+  <div class="ui-g-4 start-button">
+      <p-button label="Старт" styleClass="ui-button-info" style="width:100%" (onClick)="showDialog()"></p-button>
+  </div>
+  <div class="ui-g-4"></div>
+</div>

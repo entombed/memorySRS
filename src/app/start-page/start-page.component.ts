@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GetRandomItemService } from '../services/get-random-item.service';
+import { DialogWindowComponent } from '../dialog-window/dialog-window.component';
 
 @Component({
   selector: 'app-start-page',
@@ -9,6 +10,7 @@ import { GetRandomItemService } from '../services/get-random-item.service';
 })
 export class StartPageComponent implements OnInit {
 
+  @ViewChild(DialogWindowComponent) private dialogWindowComponent: DialogWindowComponent;
   constructor(private _getRandomItem : GetRandomItemService) { }
 
   ngOnInit() {
@@ -47,11 +49,15 @@ sasas asasa
 
   getQuestion(id?) {
     let item = this._getRandomItem.getItem(0, this.questionsArray.length);
-    if (id == item) {
+    if (id === item) {
       this.getQuestion(this._getRandomItem.getItem(0, this.questionsArray.length))
     } else {
       this.question = this.questionsArray[item];
       this.question.id = item;
     }
+  }
+
+  showDialog(){
+    this.dialogWindowComponent.show();
   }
 }
