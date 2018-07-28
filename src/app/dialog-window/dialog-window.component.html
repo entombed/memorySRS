@@ -4,7 +4,7 @@
   </p-header>
   <h4>Вопрос</h4>
   <div>
-    <p [innerHTML]="inQuestion.question"></p>
+    <pre [innerHTML]="inQuestion.question"></pre>
   </div>
   <div *ngIf="displayAnswer" [@animateAnswer]>
     <h4>Ответ</h4>
