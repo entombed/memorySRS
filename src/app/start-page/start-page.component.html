@@ -8,3 +8,8 @@
   </div>
   <div class="ui-g-4"></div>
 </div>
+<div class="ui-g">
+  <div class="ui-g-12"><p-checkbox name="group" value="arrayOne" label="Массивы" [(ngModel)]="selectedCategories" inputId="arrayOne"></p-checkbox></div>
+  <div class="ui-g-12"><p-checkbox name="group" value="arrayTwo" label="Циклы" [(ngModel)]="selectedCategories" inputId="arrayTwo"></p-checkbox></div>
+</div>
+<p-button label="SHOW" styleClass="ui-button-info" (onClick)="show()"></p-button>

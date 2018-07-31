@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="displayDialog" modal="modal" [minWidth]="500" positionTop="100">
+<p-dialog *ngIf="inQuestion" [(visible)]="displayDialog" modal="modal" [minWidth]="500" positionTop="100">
   <p-header>
       {{inQuestion.id + 1}}
   </p-header>
