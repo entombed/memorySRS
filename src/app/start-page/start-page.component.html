@@ -1,10 +1,10 @@
 
 
-<app-dialog-window  [inQuestion]="question" (outGetQuestion)="getQuestion($event)"></app-dialog-window>
+<app-dialog-window [inQuestion]="question" (outGetQuestion)="getQuestion($event)"></app-dialog-window>
 <div class="ui-g">
   <div class="ui-g-4"></div>
   <div class="ui-g-4 start-button">
-      <p-button label="Старт" styleClass="ui-button-info" [ngStyle]="{'width':'100%'}" (onClick)="showDialog()"></p-button>
+      <p-button label="Старт" styleClass="ui-button-info" [ngStyle]="{'width':'100%'}" (onClick)="showDialog()" [disabled]="!this.selectedCategories.length > 0"></p-button>
   </div>
   <div class="ui-g-4"></div>
 </div>
@@ -12,4 +12,3 @@
   <div class="ui-g-12"><p-checkbox name="group" value="arrayOne" label="Массивы" [(ngModel)]="selectedCategories" inputId="arrayOne"></p-checkbox></div>
   <div class="ui-g-12"><p-checkbox name="group" value="arrayTwo" label="Циклы" [(ngModel)]="selectedCategories" inputId="arrayTwo"></p-checkbox></div>
 </div>
-<p-button label="SHOW" styleClass="ui-button-info" (onClick)="show()"></p-button>

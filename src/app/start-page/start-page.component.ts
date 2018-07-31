@@ -150,8 +150,8 @@ export class StartPageComponent implements OnInit {
 
   showDialog() {
     this.createQuestionsArray();
-    this.getQuestion();
-    if (this.questionsArray) {
+    if (this.questionsArray.length > 0) {
+      this.getQuestion();
       this.dialogWindowComponent.show();
     }
   }
