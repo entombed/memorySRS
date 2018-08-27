@@ -1,28 +1,38 @@
+<app-dialog-window [inQuestion]="question" (outGetQuestion)="getQuestion($event)">
 
-
-<app-dialog-window [inQuestion]="question" (outGetQuestion)="getQuestion($event)"></app-dialog-window>
+</app-dialog-window>
 
 <div class="ui-g">
   <div class="ui-g-4"></div>
   <div class="ui-g-4 start-button">
-      <p-button label="Старт" styleClass="ui-button-info" [ngStyle]="{'width':'100%'}" (onClick)="showDialog()" [disabled]="!this.selectedCategories.length > 0"></p-button>
+    <p-button label="Старт" styleClass="ui-button-info" [ngStyle]="{'width':'100%'}" (onClick)="showDialog()" [disabled]="!this.selectedCategories.length > 0"></p-button>
   </div>
   <div class="ui-g-2 randomModeButtom">
     <p-toggleButton [(ngModel)]="randomMode" onLabel="Случайный" offLabel="По порядку" [ngStyle]="{'width':'100%'}"></p-toggleButton>
   </div>
   <div class="ui-g-2"></div>
 </div>
-<div class="ui-g">
-  <h3>
-    Психология
-  </h3>
-  <div class="ui-g-12"><p-checkbox name="group" value="arraySchemeTherapy" label="Схема-Терапия" [(ngModel)]="selectedCategories" inputId="arraySchemeTherapy"></p-checkbox></div>
+
+<div class="ui-g-12">
+  <div class="ui-g-2">
+    <h3>
+      Психология
+    </h3>
+    <div class="ui-g-12">
+      <p-checkbox name="groupQuestions" value="arraySchemeTherapy" label="Схема-Терапия" [(ngModel)]="selectedCategories"></p-checkbox>
+    </div>
+  </div>
+
+  <div class="ui-g-2">
+    <h3>
+      JS
+    </h3>
+    <div class="ui-g-12">
+      <p-checkbox name="groupQuestions" value="arrayJsArray" label="Массивы" [(ngModel)]="selectedCategories"></p-checkbox>
+    </div>
+    <div class="ui-g-12">
+      <p-checkbox name="groupQuestions" value="arrayJsRound" label="Циклы" [(ngModel)]="selectedCategories"></p-checkbox>
+    </div>
+  </div>
+  
 </div>
-<div class="ui-g">
-  <h3>
-    JS
-  </h3>
-  <div class="ui-g-12"><p-checkbox name="group" value="arrayJsArray" label="Массивы" [(ngModel)]="selectedCategories" inputId="arrayJsArray"></p-checkbox></div>
-  <div class="ui-g-12"><p-checkbox name="group" value="arrayJsRound" label="Циклы" [(ngModel)]="selectedCategories" inputId="arrayJsRound"></p-checkbox></div>
-</div>
-<!-- <p-checkbox [(ngModel)]="randomMode" label="Случайные вопросы" binary="true"></p-checkbox> -->
