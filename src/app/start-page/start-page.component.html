@@ -1,6 +1,7 @@
 
 
 <app-dialog-window [inQuestion]="question" (outGetQuestion)="getQuestion($event)"></app-dialog-window>
+
 <div class="ui-g">
   <div class="ui-g-4"></div>
   <div class="ui-g-4 start-button">
@@ -9,6 +10,15 @@
   <div class="ui-g-4"></div>
 </div>
 <div class="ui-g">
+  <h3>
+    Психология
+  </h3>
+  <div class="ui-g-12"><p-checkbox name="group" value="arraySchemeTherapy" label="Схема-Терапия" [(ngModel)]="selectedCategories" inputId="arraySchemeTherapy"></p-checkbox></div>
+</div>
+<div class="ui-g">
+  <h3>
+    JS
+  </h3>
   <div class="ui-g-12"><p-checkbox name="group" value="arrayOne" label="Массивы" [(ngModel)]="selectedCategories" inputId="arrayOne"></p-checkbox></div>
   <div class="ui-g-12"><p-checkbox name="group" value="arrayTwo" label="Циклы" [(ngModel)]="selectedCategories" inputId="arrayTwo"></p-checkbox></div>
 </div>
