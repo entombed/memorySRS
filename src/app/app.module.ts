@@ -5,6 +5,7 @@ import {DialogModule} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 import { AppComponent } from './app.component';
 import { DialogWindowComponent } from './dialog-window/dialog-window.component';
@@ -23,7 +24,8 @@ import { StartPageComponent } from './start-page/start-page.component';
     DialogModule,
     FormsModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    ToggleButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

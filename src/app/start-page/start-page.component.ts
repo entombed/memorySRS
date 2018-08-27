@@ -14,6 +14,7 @@ export class StartPageComponent implements OnInit {
   constructor(private _getRandomItem: GetRandomItemService) { }
   questionsArray = [];
   selectedCategories = [];
+  randomMode: boolean = true;
 
   ngOnInit() {
 
@@ -21,7 +22,7 @@ export class StartPageComponent implements OnInit {
 
   question: any;
 
-  arrayOne = [
+  arrayJsArray = [
     {
       question: `
       Написать инструкцию do while
@@ -93,7 +94,7 @@ export class StartPageComponent implements OnInit {
     }
   ];
 
-  arrayTwo = [
+  arrayJsRound = [
     {
       question: "Какое булево значение вернется если: 1,2,3, Infinity, -Infinity, 'string'",
       answer: "Ответ: True"
@@ -134,11 +135,11 @@ export class StartPageComponent implements OnInit {
   arraySchemeTherapy = [
     {
       question: `По какому признаку узнать, что активируется схема?`,
-      answer:`вознимают сильные негативные чувства: тревога, смущение и т.д.`
+      answer: `вознимают сильные негативные чувства: тревога, смущение и т.д.`
     },
     {
       question: `Что такое схема (РДС)?`,
-      answer:`модель жизни, которая влияет на чувства, мысли, поведение, образы, отношения, восприятие социальных ситуаций`
+      answer: `модель жизни, которая влияет на чувства, мысли, поведение, образы, отношения, восприятие социальных ситуаций`
     },
     {
       question: `Когда схему можно назвать патологической?`,
@@ -223,12 +224,39 @@ export class StartPageComponent implements OnInit {
   }
 
   getQuestion(id?) {
+    // let item = this._getRandomItem.getItem(0, this.questionsArray.length);
+    // if (id === item) {
+    //   this.getQuestion(this._getRandomItem.getItem(0, this.questionsArray.length))
+    // } else {
+    //   this.question = this.questionsArray[item];
+    //   this.question.id = item;
+    // }
+    if (this.randomMode) {
+      this.getRandom(id);
+    } else {
+      this.getNotRandom(id);
+    }
+  }
+
+  getRandom(id?) {
     let item = this._getRandomItem.getItem(0, this.questionsArray.length);
     if (id === item) {
       this.getQuestion(this._getRandomItem.getItem(0, this.questionsArray.length))
     } else {
       this.question = this.questionsArray[item];
       this.question.id = item;
+    }
+  }
+
+  getNotRandom(id) {
+    if (id === undefined) {
+      this.question = this.questionsArray[0];
+      this.question.id = 0;
+    } else if (id + 1 < this.questionsArray.length) {
+      this.question = this.questionsArray[id + 1];
+      this.question.id = id + 1;
+    } else if (id + 1 == this.questionsArray.length) {
+      this.theEnd();
     }
   }
 
@@ -240,14 +268,21 @@ export class StartPageComponent implements OnInit {
     }
   }
 
+  theEnd() {
+    this.question = {
+      question: "Вопросы закончились",
+      id: -1
+    }
+  }
+
   createQuestionsArray() {
     this.questionsArray = [];
     for (let i = 0; i < this.selectedCategories.length; i++) {
-      if (this.selectedCategories[i] == "arrayOne") {
-        this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arrayOne);
+      if (this.selectedCategories[i] == "arrayJsArray") {
+        this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arrayJsArray);
       }
-      if (this.selectedCategories[i] == "arrayTwo") {
-        this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arrayTwo);
+      if (this.selectedCategories[i] == "arrayJsRound") {
+        this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arrayJsRound);
       }
       if (this.selectedCategories[i] == "arraySchemeTherapy") {
         this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arraySchemeTherapy);

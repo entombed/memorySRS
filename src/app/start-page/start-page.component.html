@@ -7,7 +7,10 @@
   <div class="ui-g-4 start-button">
       <p-button label="Старт" styleClass="ui-button-info" [ngStyle]="{'width':'100%'}" (onClick)="showDialog()" [disabled]="!this.selectedCategories.length > 0"></p-button>
   </div>
-  <div class="ui-g-4"></div>
+  <div class="ui-g-2 randomModeButtom">
+    <p-toggleButton [(ngModel)]="randomMode" onLabel="Случайный" offLabel="По порядку" [ngStyle]="{'width':'100%'}"></p-toggleButton>
+  </div>
+  <div class="ui-g-2"></div>
 </div>
 <div class="ui-g">
   <h3>
@@ -19,6 +22,7 @@
   <h3>
     JS
   </h3>
-  <div class="ui-g-12"><p-checkbox name="group" value="arrayOne" label="Массивы" [(ngModel)]="selectedCategories" inputId="arrayOne"></p-checkbox></div>
-  <div class="ui-g-12"><p-checkbox name="group" value="arrayTwo" label="Циклы" [(ngModel)]="selectedCategories" inputId="arrayTwo"></p-checkbox></div>
+  <div class="ui-g-12"><p-checkbox name="group" value="arrayJsArray" label="Массивы" [(ngModel)]="selectedCategories" inputId="arrayJsArray"></p-checkbox></div>
+  <div class="ui-g-12"><p-checkbox name="group" value="arrayJsRound" label="Циклы" [(ngModel)]="selectedCategories" inputId="arrayJsRound"></p-checkbox></div>
 </div>
+<!-- <p-checkbox [(ngModel)]="randomMode" label="Случайные вопросы" binary="true"></p-checkbox> -->

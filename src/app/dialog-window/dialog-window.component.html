@@ -11,8 +11,8 @@
     <pre [innerHTML]="inQuestion.answer"></pre>
   </div>
   <p-footer>
-    <button type="button" pButton icon="fa fa-eye" (click)="displayAnswer=displayAnswer ? false : true" label="Показать подсказку"></button>
-    <button type="button" pButton icon="fa fa-forward" (click)="next()" label="Следующий вопрос"></button>
+    <button type="button" pButton icon="fa fa-eye" (click)="displayAnswer=displayAnswer ? false : true" label="Показать подсказку" [disabled]="!inQuestion.answer"></button>
+    <button type="button" pButton icon="fa fa-forward" (click)="next()" [label]="inQuestion.answer ? 'Следующий вопрос' : 'Начать заново'"></button>
     <button type="button" pButton icon="fa fa-close" (click)="displayDialog=false" label="Закрыть"></button>
   </p-footer>
 </p-dialog>
