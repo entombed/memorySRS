@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GetRandomItemService } from '../services/get-random-item.service';
 import { DialogWindowComponent } from '../dialog-window/dialog-window.component';
 
@@ -6,6 +6,7 @@ import { DialogWindowComponent } from '../dialog-window/dialog-window.component'
   selector: 'app-start-page',
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: [GetRandomItemService]
 })
 export class StartPageComponent implements OnInit {
