@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GetRandomItemService } from '../services/get-random-item.service';
+import { ShuffleService } from '../services/shuffle.service';
 import { DialogWindowComponent } from '../dialog-window/dialog-window.component';
 
 @Component({
@@ -7,18 +8,29 @@ import { DialogWindowComponent } from '../dialog-window/dialog-window.component'
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.css'],
   encapsulation: ViewEncapsulation.None,
-  providers: [GetRandomItemService]
+  providers: [
+    GetRandomItemService,
+    ShuffleService
+  ]
 })
 export class StartPageComponent implements OnInit {
 
   @ViewChild(DialogWindowComponent) private dialogWindowComponent: DialogWindowComponent;
-  constructor(private _getRandomItem: GetRandomItemService) { }
+  constructor(
+    private _getRandomItem: GetRandomItemService,
+    private _shuffleService: ShuffleService
+  ) { }
   questionsArray = [];
   selectedCategories = [];
   randomMode: boolean = true;
+  allArray: any[];
 
   ngOnInit() {
-
+    this.allArray = [
+      this.arrayJsArray,
+      this.arrayJsRound,
+      this.arraySchemeTherapy
+    ]
   }
 
   question: any;
@@ -217,12 +229,12 @@ export class StartPageComponent implements OnInit {
     },
   ]
 
-  addToQuestionArray(arr1: any[], arr2: any[]) {
-    for (let i = 0; i < arr2.length; i++) {
-      arr1.push(arr2[i]);
-    }
-    return arr1;
-  }
+  // addToQuestionArray(arr1: any[], arr2: any[]) {
+  //   for (let i = 0; i < arr2.length; i++) {
+  //     arr1.push(arr2[i]);
+  //   }
+  //   return arr1;
+  // }
 
   getQuestion(id?) {
     // let item = this._getRandomItem.getItem(0, this.questionsArray.length);
@@ -232,24 +244,12 @@ export class StartPageComponent implements OnInit {
     //   this.question = this.questionsArray[item];
     //   this.question.id = item;
     // }
-    if (this.randomMode) {
-      this.getRandom(id);
-    } else {
-      this.getNotRandom(id);
-    }
-  }
-
-  getRandom(id?) {
-    let item = this._getRandomItem.getItem(0, this.questionsArray.length);
-    if (id === item) {
-      this.getQuestion(this._getRandomItem.getItem(0, this.questionsArray.length))
-    } else {
-      this.question = this.questionsArray[item];
-      this.question.id = item;
-    }
-  }
-
-  getNotRandom(id) {
+    // if (this.randomMode) {
+    //   this.getRandom(id);
+    // } else {
+    //   this.getNotRandom(id);
+    // }
+    // this.getNotRandom(id);
     if (id === undefined) {
       this.question = this.questionsArray[0];
       this.question.id = 0;
@@ -260,6 +260,28 @@ export class StartPageComponent implements OnInit {
       this.theEnd();
     }
   }
+
+  // getRandom(id?) {
+  //   let item = this._getRandomItem.getItem(0, this.questionsArray.length);
+  //   if (id === item) {
+  //     this.getQuestion(this._getRandomItem.getItem(0, this.questionsArray.length))
+  //   } else {
+  //     this.question = this.questionsArray[item];
+  //     this.question.id = item;
+  //   }
+  // }
+
+  // getNotRandom(id) {
+  //   if (id === undefined) {
+  //     this.question = this.questionsArray[0];
+  //     this.question.id = 0;
+  //   } else if (id + 1 < this.questionsArray.length) {
+  //     this.question = this.questionsArray[id + 1];
+  //     this.question.id = id + 1;
+  //   } else if (id + 1 == this.questionsArray.length) {
+  //     this.theEnd();
+  //   }
+  // }
 
   showDialog() {
     this.createQuestionsArray();
@@ -274,20 +296,25 @@ export class StartPageComponent implements OnInit {
       question: "Вопросы закончились",
       id: -1
     }
+    if (this.randomMode) {
+      this.questionsArray = this._shuffleService.mixIt(this.questionsArray);
+    }
   }
 
   createQuestionsArray() {
     this.questionsArray = [];
     for (let i = 0; i < this.selectedCategories.length; i++) {
-      if (this.selectedCategories[i] == "arrayJsArray") {
-        this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arrayJsArray);
+      let item = this.selectedCategories[i];
+      let index = this.selectedCategories.indexOf(item);
+      if (index != -1) {
+        let tmpLength = this.allArray[index].length;
+        for (let i = 0; i < tmpLength; i++) {
+          this.questionsArray.push(this.allArray[index][i])
+        }
       }
-      if (this.selectedCategories[i] == "arrayJsRound") {
-        this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arrayJsRound);
-      }
-      if (this.selectedCategories[i] == "arraySchemeTherapy") {
-        this.questionsArray = this.addToQuestionArray(this.questionsArray, this.arraySchemeTherapy);
-      }
+    }
+    if (this.randomMode) {
+      this.questionsArray = this._shuffleService.mixIt(this.questionsArray);
     }
   }
 }
