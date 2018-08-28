@@ -5,7 +5,7 @@ import { ShuffleService } from '../services/shuffle.service';
 
 export class CreateQuestionsService {
   questionsArray = [];
-  allArray: any[];
+  allArray;
 
   constructor(
     private _shuffleService: ShuffleService
@@ -206,31 +206,26 @@ export class CreateQuestionsService {
   ]
 
   craeteAllArray() {
-    this.allArray = [
-      this.arrayJsArray,
-      this.arrayJsRound,
-      this.arraySchemeTherapy
-    ]
+    this.allArray = {
+      "arrayJsArray": this.arrayJsArray,
+      "arrayJsRound": this.arrayJsRound,
+      "arraySchemeTherapy": this.arraySchemeTherapy
+    };
   }
 
   createQuestionsArray(array, mode) {
-    // console.log(array)
-    // console.dir(this.allArray)
     this.questionsArray = [];
     for (let i = 0; i < array.length; i++) {
+      
       let item = array[i];
-      let index = array.indexOf(item);
-      if (index != -1) {
-        let tmpLength = this.allArray[index].length;
+        let tmpLength = this.allArray[item].length;
         for (let i = 0; i < tmpLength; i++) {
-          this.questionsArray.push(this.allArray[index][i])
+          this.questionsArray.push(this.allArray[item][i])
         }
-      }
     }
     if (mode) {
       this.questionsArray = this._shuffleService.mixIt(this.questionsArray);
     }
-    // console.dir(this.questionsArray)
     return this.questionsArray;
   }
 }
