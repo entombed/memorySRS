@@ -1,63 +1,62 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { GetRandomItemService } from '../services/get-random-item.service';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ShuffleService } from '../services/shuffle.service';
 import { DialogWindowComponent } from '../dialog-window/dialog-window.component';
+import { CreateQuestionsService } from '../services/create-questions.service';
 
 @Component({
   selector: 'app-start-page',
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.css'],
-  providers: [GetRandomItemService]
+  encapsulation: ViewEncapsulation.None,
+  providers: [
+    ShuffleService,
+    CreateQuestionsService
+  ]
 })
 export class StartPageComponent implements OnInit {
 
   @ViewChild(DialogWindowComponent) private dialogWindowComponent: DialogWindowComponent;
-  constructor(private _getRandomItem : GetRandomItemService) { }
+  constructor(
+    private _shuffleService: ShuffleService,
+    private _createQuestionsService: CreateQuestionsService
+  ) { }
+  questionsArray = [];
+  selectedCategories = [];
+  randomMode: boolean = true;
 
   ngOnInit() {
-    this.getQuestion();
+    this._createQuestionsService.craeteAllArray();
   }
 
   question: any;
-  questionsArray = [
-    {
-      question: 'вопрос первый?',
-      answer: 'повернуть на лево',
-    },
-    {
-      question: 'вопрос второй?',
-      answer: 'взглянуть вверх',
-    },
-    {
-      question: 'вопрос третий?',
-      answer: 'переступить порог',
-    },
-    {
-      question: 'вопрос четвертый?',
-      answer: 'подняться по ступеньке',
-    },
-    {
-      question: 'вопрос пятый?',
-      answer:`
-подпрыгнуть
-sasas asasa
-  getAnswer(){
-    console.log("qqqq")
-  }
-`
-    },
-  ]
 
   getQuestion(id?) {
-    let item = this._getRandomItem.getItem(0, this.questionsArray.length);
-    if (id === item) {
-      this.getQuestion(this._getRandomItem.getItem(0, this.questionsArray.length))
-    } else {
-      this.question = this.questionsArray[item];
-      this.question.id = item;
+    if (id === undefined) {
+      this.question = this.questionsArray[0];
+      this.question.id = 0;
+    } else if (id + 1 < this.questionsArray.length) {
+      this.question = this.questionsArray[id + 1];
+      this.question.id = id + 1;
+    } else if (id + 1 == this.questionsArray.length) {
+      this.theEnd();
     }
   }
 
-  showDialog(){
-    this.dialogWindowComponent.show();
+  showDialog() {
+    this.questionsArray = this._createQuestionsService.createQuestionsArray(this.selectedCategories, this.randomMode);
+    if (this.questionsArray.length > 0) {
+      this.getQuestion();
+      this.dialogWindowComponent.show();
+    }
+  }
+
+  theEnd() {
+    this.question = {
+      question: "Вопросы закончились",
+      id: -1
+    }
+    if (this.randomMode) {
+      this.questionsArray = this._shuffleService.mixIt(this.questionsArray);
+    }
   }
 }

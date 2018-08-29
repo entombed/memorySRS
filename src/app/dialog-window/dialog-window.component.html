@@ -1,18 +1,18 @@
-<p-dialog [(visible)]="displayDialog" modal="modal" [minWidth]="500" positionTop="100">
+<p-dialog *ngIf="inQuestion" [(visible)]="displayDialog" modal="modal" [minWidth]="500" positionTop="100">
   <p-header>
       {{inQuestion.id + 1}}
   </p-header>
   <h4>Вопрос</h4>
   <div>
-    <p [innerHTML]="inQuestion.question"></p>
+    <pre [innerHTML]="inQuestion.question"></pre>
   </div>
   <div *ngIf="displayAnswer" [@animateAnswer]>
     <h4>Ответ</h4>
     <pre [innerHTML]="inQuestion.answer"></pre>
   </div>
   <p-footer>
-    <button type="button" pButton icon="fa-eye" (click)="displayAnswer=displayAnswer ? false : true" label="Показать подсказку"></button>
-    <button type="button" pButton icon="fa-forward" (click)="next()" label="Следующий вопрос"></button>
-    <button type="button" pButton icon="fa-close" (click)="displayDialog=false" label="Закрыть"></button>
+    <button type="button" pButton icon="fa fa-eye" (click)="displayAnswer=displayAnswer ? false : true" label="Показать подсказку" [disabled]="!inQuestion.answer"></button>
+    <button type="button" pButton icon="fa fa-forward" (click)="next()" [label]="inQuestion.answer ? 'Следующий вопрос' : 'Начать заново'"></button>
+    <button type="button" pButton icon="fa fa-close" (click)="displayDialog=false" label="Закрыть"></button>
   </p-footer>
 </p-dialog>
